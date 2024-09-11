@@ -1,0 +1,125 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvah6t3xkppte"]
+
+[ext_resource type="Script" path="res://addons/ply/gui/inspector/inspector.gd" id="1"]
+
+[node name="Inspector" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1")
+
+[node name="G" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="Translate" type="Label" parent="G"]
+layout_mode = 2
+text = "Translate"
+
+[node name="TranslateInputs" type="HBoxContainer" parent="G"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Rotate" type="Label" parent="G"]
+layout_mode = 2
+text = "Rotate"
+
+[node name="RotateInputs" type="HBoxContainer" parent="G"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Scale" type="Label" parent="G"]
+layout_mode = 2
+text = "Scale"
+
+[node name="ScaleInputs" type="HBoxContainer" parent="G"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="V" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="V"]
+layout_mode = 2
+text = "Vertices "
+
+[node name="VertexCount" type="LineEdit" parent="V"]
+layout_mode = 2
+size_flags_horizontal = 3
+editable = false
+
+[node name="Label2" type="Label" parent="V"]
+layout_mode = 2
+text = "Edges"
+
+[node name="EdgeCount" type="LineEdit" parent="V"]
+layout_mode = 2
+size_flags_horizontal = 3
+editable = false
+
+[node name="Label3" type="Label" parent="V"]
+layout_mode = 2
+text = "Faces"
+
+[node name="FaceCount" type="LineEdit" parent="V"]
+layout_mode = 2
+size_flags_horizontal = 3
+editable = false
+
+[node name="Label4" type="Label" parent="V"]
+layout_mode = 2
+text = "Selection"
+
+[node name="Selection" type="LineEdit" parent="V"]
+layout_mode = 2
+size_flags_horizontal = 3
+editable = false
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+
+[node name="SnapValuesTitle" type="Label" parent="."]
+layout_mode = 2
+text = "Gizmo Snap Values"
+
+[node name="P" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 6
+
+[node name="Translate" type="Label" parent="P"]
+layout_mode = 2
+text = "trnsl"
+
+[node name="TranslateSnap" type="SpinBox" parent="P"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.01
+max_value = 50000.0
+step = 0.001
+value = 1.0
+
+[node name="Rotate" type="Label" parent="P"]
+layout_mode = 2
+text = "rot"
+
+[node name="RotateSnap" type="SpinBox" parent="P"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 360.0
+step = 0.001
+value = 15.0
+
+[node name="Scale" type="Label" parent="P"]
+layout_mode = 2
+text = "scl"
+
+[node name="ScaleSnap" type="SpinBox" parent="P"]
+layout_mode = 2
+size_flags_horizontal = 3
+step = 0.001
+value = 0.1

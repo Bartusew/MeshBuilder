@@ -1,0 +1,157 @@
+[gd_scene load_steps=2 format=3 uid="uid://3ixrj6kdk2y"]
+
+[ext_resource type="Script" path="res://addons/MeshBuilder/pluginFrontend/MeshBuilderManager.gd" id="1_4nbfb"]
+
+[node name="MeshBuilder" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4nbfb")
+
+[node name="NothingIsSelected" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 29.0
+offset_top = 24.0
+offset_right = -29.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="NothingIsSelected"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "It appears you don't have selected any mesh instance. Do you want to create new mesh instance with new mesh applied to it?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="NothingIsSelected"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 10
+text = "Yep"
+
+[node name="Selected_NOT_meshInstance" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 29.0
+offset_top = 24.0
+offset_right = -29.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Selected_NOT_meshInstance"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "It appears you selected different node than a mesh instance. Do you want to create new mesh instance with new mesh applied to it, as a child to current selected node?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="Selected_NOT_meshInstance"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 10
+text = "Yep"
+
+[node name="EmptyMeshInstanceSelected" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 29.0
+offset_top = 24.0
+offset_right = -29.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="EmptyMeshInstanceSelected"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Mesh instance that you selected does not have any mesh attached to it. Do you want to create new mesh using Mesh Builder's features?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="EmptyMeshInstanceSelected"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 10
+text = "Yep"
+
+[node name="ToManySelectedNodes" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 6
+text = "You selected more than one node. Selecting only one node (AND ONLY MESH INSTANCE) is allowed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MeshEditorWindow" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="HBoxContainer" parent="MeshEditorWindow"]
+visible = false
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_vertical = 0
+alignment = 1
+
+[node name="Button" type="Button" parent="MeshEditorWindow/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button3" type="Button" parent="MeshEditorWindow/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="MeshEditorWindow"]
+visible = false
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+icon_alignment = 1
+expand_icon = true
+
+[node name="MeshEditionOptions" type="ItemList" parent="MeshEditorWindow"]
+layout_mode = 2
+size_flags_vertical = 3
+allow_reselect = true
+allow_search = false
+auto_height = true
+max_columns = 6
+same_column_width = true
+fixed_icon_size = Vector2i(28, 28)
+
+[connection signal="pressed" from="NothingIsSelected/Button" to="." method="createNewMeshInstance"]
+[connection signal="pressed" from="Selected_NOT_meshInstance/Button" to="." method="createNewChildMeshInstance"]
