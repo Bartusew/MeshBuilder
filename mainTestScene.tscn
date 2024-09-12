@@ -1,5 +1,19 @@
-[gd_scene format=3 uid="uid://cwtr7oslgoper"]
+[gd_scene load_steps=2 format=3 uid="uid://cwtr7oslgoper"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_80282"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(5.72784, 0, 0, 0, 5.72784, 0, 0, 0, 5.72784, 0, 0, 0)
+mesh = SubResource("SphereMesh_80282")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.32811, 0, 0, 0, 2.32811, 0, 0, 0, 2.32811, 3.47709, 1.94058, 3.17071)
+mesh = SubResource("SphereMesh_80282")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.23801, 0, 0, 0, 4.23801, 0, 0, 0, 4.23801, 1.98939, 0.652691, 1.66369)
+mesh = SubResource("SphereMesh_80282")
