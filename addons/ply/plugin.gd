@@ -72,7 +72,6 @@ func _exit_tree() -> void:
 func _handles(o: Object) -> bool:
 	return o is PlyEditor
 
-
 func _clear() -> void:
 	pass
 

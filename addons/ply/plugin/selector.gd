@@ -7,7 +7,7 @@ const PlyEditor = preload("res://addons/ply/nodes/ply.gd")
 
 var _plugin: EditorPlugin
 
-var selection: PlyEditor
+var selection : PlyEditor
 
 
 func _init(p: EditorPlugin):

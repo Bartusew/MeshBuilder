@@ -12,6 +12,7 @@ config_version=5
 
 config/name="MeshBuilder"
 config/tags=PackedStringArray("tool")
+run/main_scene="res://mainTestScene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://addons/MeshBuilder/MeshBuilderLogo.svg"
 

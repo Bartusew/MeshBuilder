@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://3ixrj6kdk2y"]
 
-[ext_resource type="Script" path="res://addons/MeshBuilder/pluginFrontend/MeshBuilderManager.gd" id="1_4nbfb"]
+[ext_resource type="Script" path="res://addons/MeshBuilder/pluginFrontend/MeshBuilderEditor.gd" id="1_4nbfb"]
 
 [node name="MeshBuilder" type="Control"]
 layout_mode = 3
