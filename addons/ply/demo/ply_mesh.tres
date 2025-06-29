@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PlyMesh" load_steps=2 format=3 uid="uid://cthw1bdqinskl"]
 
-[ext_resource type="Script" path="res://addons/ply/resources/ply_mesh.gd" id="1"]
+[ext_resource type="Script" uid="uid://e4bijvkqhi5g" path="res://addons/ply/resources/ply_mesh.gd" id="1"]
 
 [resource]
 script = ExtResource("1")

@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c57sixmdn0vrm"]
+
+[resource]
+shading_mode = 0
+specular_mode = 2
+disable_ambient_light = true
+disable_fog = true
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.001
+use_point_size = true
+point_size = 4.5

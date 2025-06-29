@@ -97,7 +97,7 @@ var scale_gizmo_instances = [0, 0, 0]
 var scale_plane_gizmo = [ArrayMesh.new(), ArrayMesh.new(), ArrayMesh.new()]
 var scale_plane_gizmo_instances = [0, 0, 0]
 
-var axis_colors = [Color(1.0, 0.2, 0.2), Color(0.2, 1.0, 0.2), Color(0.2, 0.2, 1.0)]
+var axis_colors = [Color.from_string("#f64c6e",Color.WHITE), Color.from_string("#abe73f",Color.WHITE), Color.from_string("#33aaf5",Color.WHITE)]
 var axis_colors_selected = [Color(1.0, 0.8, 0.8), Color(0.8, 1.0, 0.8), Color(0.8, 0.8, 1.0)]
 
 var axis_materials = [null, null, null]

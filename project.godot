@@ -12,13 +12,17 @@ config_version=5
 
 config/name="MeshBuilder"
 config/tags=PackedStringArray("tool")
-run/main_scene="res://mainTestScene.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://addons/MeshBuilder/MeshBuilderLogo.svg"
+run/main_scene="uid://cwtr7oslgoper"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://addons/MeshBuilder/icons/MeshBuilderLogo.svg"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/MeshBuilder/plugin.cfg", "res://addons/ply/plugin.cfg", "res://addons/zylann.editor_debugger/plugin.cfg")
+enabled=PackedStringArray("res://addons/MeshBuilder/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/inspector_tabs/plugin.cfg", "res://addons/ply/plugin.cfg", "res://addons/terrain_3d/plugin.cfg", "res://addons/zylann.editor_debugger/plugin.cfg")
 
 [file_customization]
 
@@ -27,3 +31,7 @@ folder_colors={
 "res://addons/MeshBuilder/": "yellow",
 "res://addons/ply/": "purple"
 }
+
+[physics]
+
+3d/physics_engine="Jolt Physics"

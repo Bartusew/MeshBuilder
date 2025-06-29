@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dr3ixmwe8ascj"]
 
-[ext_resource type="Script" path="res://addons/ply/gui/toolbar/generators.gd" id="2"]
+[ext_resource type="Script" uid="uid://dq2eoov3dqn5g" path="res://addons/ply/gui/toolbar/generators.gd" id="2"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_tn634"]
 

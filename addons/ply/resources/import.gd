@@ -6,7 +6,7 @@ static func hash_vert(mdt: MeshDataTool, v_idx: int) -> String:
 	]
 	pass
 
-#TODO: undo/redo
+#todo: undo/redo
 static func mesh(p: PlyMesh, m: ArrayMesh):
 	var mdt = MeshDataTool.new()
 	mdt.create_from_surface(m, 0)

@@ -156,7 +156,7 @@ func _on_geometry_selection_changed():
 				face_color_picker.color = color
 				face_color_picker.get_node("Label").visible = false
 		SelectionMode.EDGE:
-			pass # TODO
+			pass # todo
 		SelectionMode.VERTEX:
 			var color
 			var many = false

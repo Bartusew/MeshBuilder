@@ -1,22 +1,81 @@
 @tool
 extends EditorPlugin
 
-var meshBuilderLogo = preload("res://addons/MeshBuilder/MeshBuilderLogo.svg")
+## CLASS DEFINITIONS:
+
+const MBP = preload("uid://c0n3wfy7l2xwm")
+
+const MeshBuilderEditor = preload("uid://b3pwlm0cb24y")
+const MBHandler = preload("uid://hivshk24w1n5")
+const MouseHoveEditor = preload("uid://bsre3ybg4sjgs")
 
 var meshBuilderEditor : MeshBuilderEditor
-var spatialEditorToolbar : HFlowContainer
-var toolbar : HBoxContainer
 
-var turnOnBuilderButton : Button
-var meshSelectionModeButton : OptionButton
-var spatialOptions : MenuButton
-var exitBuilderModeButton : Button
-var editorTitleBar : HBoxContainer
+var meshBuilderHandler : MBHandler
+var mouseHoverEditor : MouseHoveEditor
+
+
+static var spatialEditorToolbar : HFlowContainer
+static var toolbar : HBoxContainer
+
+static var turnOnBuilderButton : Button
+static var meshSelectionModeButton : OptionButton
+static var spatialOptions : MenuButton
+static var exitBuilderModeButton : Button
+static var editorTitleBar : HBoxContainer
+
+var sideToolbarParent : Control
+static var sideToolbar : VBoxContainer
+
+static var plugin : MBP
+
+## Self explanatory - copies over every stylebox theme override from one control node to another
+##	useful when you want to preserve look or theme of control nodes in the editor
+func _copy_over_stylebox_overrides(from : Control, to : Control)->void:
+	to.add_theme_stylebox_override("focus",from.get_theme_stylebox("focus"))
+	to.add_theme_stylebox_override("disabled_mirrored",from.get_theme_stylebox("disabled_mirrored"))
+	to.add_theme_stylebox_override("disabled",from.get_theme_stylebox("disabled"))
+	to.add_theme_stylebox_override("hover_pressed_mirrored",from.get_theme_stylebox("hover_pressed_mirrored"))
+	to.add_theme_stylebox_override("hover_pressed",from.get_theme_stylebox("hover_pressed"))
+	to.add_theme_stylebox_override("hover_mirrored",from.get_theme_stylebox("hover_mirrored"))
+	to.add_theme_stylebox_override("hover",from.get_theme_stylebox("hover"))
+	to.add_theme_stylebox_override("pressed_mirrored",from.get_theme_stylebox("pressed_mirrored"))
+	to.add_theme_stylebox_override("pressed",from.get_theme_stylebox("pressed"))
+	to.add_theme_stylebox_override("normal_mirrored",from.get_theme_stylebox("normal_mirrored"))
+	to.add_theme_stylebox_override("normal",from.get_theme_stylebox("normal"))
+
+func createSideToolbar()->Control:
+	var scrollContainer := ScrollContainer.new()
+	sideToolbar = VBoxContainer.new()
+	
+	#marginContainer.add_theme_constant_override("margin_top", 2)
+	#marginContainer.add_theme_constant_override("margin_left", 5)
+	#marginContainer.add_theme_constant_override("margin_bottom", 2)
+	#marginContainer.add_theme_constant_override("margin_right", 5)
+	
+	#marginContainer.size.x = 44
+	scrollContainer.size.x = 32
+	
+	scrollContainer.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	
+	#marginContainer.add_child(scrollContainer)
+	scrollContainer.add_child(sideToolbar)
+	
+	scrollContainer.hide()
+	
+	return scrollContainer
+
+func sideToolbarToogle(state : bool)->void:
+	sideToolbarParent.visible = state
 
 func _enter_tree():
+	plugin = self
+	name = "MBP - Mesh Builder Plugin"
 	# Creates this dock to change tools to edit mesh and etc
-	meshBuilderEditor = preload("res://addons/MeshBuilder/pluginFrontend/MeshBuilderDock.tscn").instantiate()
-	#add_control_to_dock(DOCK_SLOT_LEFT_UR,meshBuilderEditor)
+	
+	sideToolbarParent = createSideToolbar()
+	
+	add_control_to_container(EditorPlugin.CONTAINER_SPATIAL_EDITOR_SIDE_LEFT,sideToolbarParent)
 	
 	# Creates a toolbar to swtich selection modes which will be visible every time you select a mesh instance
 	var toolbar_placeholder := Button.new()
@@ -26,12 +85,20 @@ func _enter_tree():
 	remove_control_from_container(EditorPlugin.CONTAINER_SPATIAL_EDITOR_MENU, toolbar_placeholder)
 	toolbar_placeholder.queue_free()
 	toolbar = HBoxContainer.new()
-	toolbar.name = "meshBuilderToolbar"
+	toolbar.name = "meshEditModeToolbar"
 	spatialEditorToolbar.get_parent().add_child(toolbar)
 	toolbar.hide()
 	
+	
+	
+	meshBuilderEditor = MeshBuilderEditor.new()
+	mouseHoverEditor = MouseHoveEditor.new(self)
+	meshBuilderHandler = MBHandler.new(self)
+	
+	
+	
 	# Creates a button that allows to turn mesh builder edit mode when mesh instance 3D is selected
-	var viewport = EditorInterface.get_editor_viewport_3d(0)
+	var viewport := EditorInterface.get_editor_viewport_3d(0)
 	var vboxParent : VBoxContainer = viewport.get_parent().get_parent().get_child(1).get_child(0)
 	spatialOptions = vboxParent.get_child(0)
 	
@@ -39,30 +106,12 @@ func _enter_tree():
 	turnOnBuilderButton.pressed.connect(meshBuilderEditor.turnOnMeshEditMode)
 	turnOnBuilderButton.name = "BuilderButton"
 	turnOnBuilderButton.text = "edit mesh"
-	turnOnBuilderButton.icon = meshBuilderLogo
+	turnOnBuilderButton.icon = load("uid://wsv0wfin21k6")
 	turnOnBuilderButton.expand_icon = true
 	
 	vboxParent.add_child(turnOnBuilderButton)
 	
-	var styleBox := StyleBoxFlat.new()
-	styleBox.bg_color = Color(0,0,0,0.3137)
-	styleBox.set_corner_radius_all(8)
-	styleBox.content_margin_left = 12
-	styleBox.content_margin_top = 8
-	styleBox.content_margin_right = 12
-	styleBox.content_margin_bottom = 8
-	
-	turnOnBuilderButton.add_theme_stylebox_override("focus",styleBox)
-	turnOnBuilderButton.add_theme_stylebox_override("disabled_mirrored",styleBox)
-	turnOnBuilderButton.add_theme_stylebox_override("disabled",styleBox)
-	turnOnBuilderButton.add_theme_stylebox_override("hover_pressed_mirrored",styleBox)
-	turnOnBuilderButton.add_theme_stylebox_override("hover_pressed",styleBox)
-	turnOnBuilderButton.add_theme_stylebox_override("hove_mirrored",styleBox)
-	turnOnBuilderButton.add_theme_stylebox_override("hover",styleBox)
-	turnOnBuilderButton.add_theme_stylebox_override("pressed_mirrored",styleBox)
-	turnOnBuilderButton.add_theme_stylebox_override("pressed",styleBox)
-	turnOnBuilderButton.add_theme_stylebox_override("normal_mirrored",styleBox)
-	turnOnBuilderButton.add_theme_stylebox_override("normal",styleBox)
+	_copy_over_stylebox_overrides(spatialOptions,turnOnBuilderButton)
 	
 	turnOnBuilderButton.hide()
 	
@@ -79,17 +128,7 @@ func _enter_tree():
 	# -1 because first keyname "off" is ignored
 	meshSelectionModeButton.select(MeshBuilderEditor.meshEditModes.edit_mode - 1)
 	
-	meshSelectionModeButton.add_theme_stylebox_override("focus",styleBox)
-	meshSelectionModeButton.add_theme_stylebox_override("disabled_mirrored",styleBox)
-	meshSelectionModeButton.add_theme_stylebox_override("disabled",styleBox)
-	meshSelectionModeButton.add_theme_stylebox_override("hover_pressed_mirrored",styleBox)
-	meshSelectionModeButton.add_theme_stylebox_override("hover_pressed",styleBox)
-	meshSelectionModeButton.add_theme_stylebox_override("hove_mirrored",styleBox)
-	meshSelectionModeButton.add_theme_stylebox_override("hover",styleBox)
-	meshSelectionModeButton.add_theme_stylebox_override("pressed_mirrored",styleBox)
-	meshSelectionModeButton.add_theme_stylebox_override("pressed",styleBox)
-	meshSelectionModeButton.add_theme_stylebox_override("normal_mirrored",styleBox)
-	meshSelectionModeButton.add_theme_stylebox_override("normal",styleBox)
+	_copy_over_stylebox_overrides(spatialOptions,meshSelectionModeButton)
 	
 	vboxParent.add_child(meshSelectionModeButton)
 	
@@ -111,17 +150,9 @@ func _enter_tree():
 	]
 	
 	# Sends placeholder icons into the dock so it can be used without errors
-	meshBuilderEditor.meshEditOptionsIcons = meshEditIcons
+	#meshBuilderEditor.meshEditOptionsIcons = meshEditIcons
 	# Calls a function from dock so it will load sended placeholder icons
 	#meshBuilderEditor.loadIconsIntoMeshEditField()
-	# Sends toolbar to dock so it can change tools depending on selection mode
-	meshBuilderEditor.selectionModeToolbar = toolbar
-	meshBuilderEditor.spatialEditorToolbar = spatialEditorToolbar
-	meshBuilderEditor.turnOnBuilderButton = turnOnBuilderButton
-	meshBuilderEditor.exitMeshBuilderButton = exitBuilderModeButton
-	meshBuilderEditor.meshSelectionModeButton = meshSelectionModeButton
-	meshBuilderEditor.editorTitleBar = editorTitleBar
-	meshBuilderEditor.spatialOptions = spatialOptions
 	meshBuilderEditor.spatialGizmoSnapPoint = MeshInstance3D.new()
 	
 	# Creates a group which will make sure that only one selection mode can turned on at a time.
@@ -164,7 +195,38 @@ func _enter_tree():
 		
 		selectMode_button.pressed.connect(selectModeButton_Callable)
 
+func _input(event: InputEvent) -> void:
+	# Prevents addon from working while game instance is running
+	if !Engine.is_editor_hint():
+		return
+	mouseHoverEditor._receiveInput(event)
+	meshBuilderHandler._receiveInput(event)
+	meshBuilderEditor._receiveInput(event)
 
+func _process(delta: float) -> void:
+	# Prevents addon from working while game instance is running
+	if !Engine.is_editor_hint():
+		return
+	
+	meshBuilderEditor._update()
+	meshBuilderHandler._update()
+
+func _ready() -> void:
+	# Prevents addon from working while game instance is running
+	if !Engine.is_editor_hint():
+		return
+	
+	meshBuilderEditor._start()
+	meshBuilderHandler._start()
+
+## This function returs the HboxContainer that is the parent of buttons used to switch main Godot editor 
+##  like the 2D, 3D, Script, Game, Assetlib buttons
+func getMainScreenButtons()->HBoxContainer:
+	var ctrl : Control = EditorInterface.get_base_control()
+	ctrl = ctrl.get_child(0).get_child(0).get_child(2)
+	return ctrl
+
+#region Edit Mesh essential [for later]
 func _handles(object: Object) -> bool:
 	return object is MeshInstance3D
 
@@ -178,20 +240,20 @@ func _forward_3d_gui_input(viewport_camera: Camera3D, event: InputEvent) -> int:
 			return EditorPlugin.AFTER_GUI_INPUT_CUSTOM
 	
 	return EditorPlugin.AFTER_GUI_INPUT_PASS
+#endregion
 
-
-func getMainScreenButtons()->HBoxContainer:
-	var ctrl : Control = EditorInterface.get_base_control()
-	ctrl = ctrl.get_child(0).get_child(0).get_child(2)
-	return ctrl
-
+# Plugin cleanup
 func _exit_tree():
 	#remove_control_from_docks(meshBuilderEditor)
 	exitBuilderModeButton.queue_free()
-	meshBuilderEditor.turnOffMeshEditMode()
-	meshBuilderEditor.spatialGizmoSnapPoint.queue_free()
+	meshBuilderEditor.onPluginRemove()
 	meshBuilderEditor.queue_free()
+	remove_control_from_container(EditorPlugin.CONTAINER_SPATIAL_EDITOR_SIDE_LEFT, sideToolbarParent)
+	meshBuilderHandler.onPluginRemove()
+	meshBuilderHandler.queue_free()
+	sideToolbarParent.queue_free()
+	mouseHoverEditor.queue_free()
 	if is_instance_valid(toolbar):
-		remove_control_from_container(EditorPlugin.CONTAINER_SPATIAL_EDITOR_MENU,toolbar)
 		toolbar.queue_free()
 	turnOnBuilderButton.queue_free()
+	

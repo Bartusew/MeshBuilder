@@ -54,7 +54,7 @@ func set_materials(v) -> void:
 	_paint_faces()
 
 
-@onready var parent = get_parent()
+@onready var parent : VisualInstance3D = get_parent()
 
 
 func _ready() -> void:

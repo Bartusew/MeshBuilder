@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://rbw8snfqran1" path="res://addons/ply/icons/dark/select_face_ring_h_dark.png" id="10_r3rjd"]
 [ext_resource type="Texture2D" uid="uid://d31hw6p785i60" path="res://addons/ply/icons/dark/flip_normals_dark.png" id="10_uborc"]
 [ext_resource type="Texture2D" uid="uid://o4n86wk5elwe" path="res://addons/ply/icons/dark/extrude_face_dark.png" id="11_ods2w"]
-[ext_resource type="Script" path="res://addons/ply/gui/toolbar/toolbar.gd" id="12"]
+[ext_resource type="Script" uid="uid://cyus1ouqjsh5u" path="res://addons/ply/gui/toolbar/toolbar.gd" id="12"]
 [ext_resource type="Texture2D" uid="uid://bea5uloqyd4rq" path="res://addons/ply/icons/dark/merge_face_dark.png" id="12_t4tf1"]
 [ext_resource type="Texture2D" uid="uid://dyivagnwnahle" path="res://addons/ply/icons/dark/subdivide_face_dark.png" id="13_68wte"]
 [ext_resource type="Texture2D" uid="uid://ev2wv282wx0s" path="res://addons/ply/icons/dark/triangulate_dark.png" id="14_8ytvm"]
@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bg6l4ww3iyp8u" path="res://addons/ply/icons/dark/loopcut_v_dark.png" id="16_nokrw"]
 [ext_resource type="Texture2D" uid="uid://bdi6gpvnfxm6u" path="res://addons/ply/icons/GitHub-Mark-Light-32px.png" id="17"]
 [ext_resource type="Texture2D" uid="uid://cknwf8bxtl5b5" path="res://addons/ply/icons/dark/subdivide_edge_dark.png" id="17_lihy5"]
-[ext_resource type="Script" path="res://addons/ply/gui/toolbar/github_link.gd" id="18"]
+[ext_resource type="Script" uid="uid://dprn5snnqw4ok" path="res://addons/ply/gui/toolbar/github_link.gd" id="18"]
 [ext_resource type="Texture2D" uid="uid://cfm8umrb1vs7r" path="res://addons/ply/icons/dark/collapse_edge_dark.png" id="18_b8383"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_jgq6o"]

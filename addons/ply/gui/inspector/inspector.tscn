@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dvah6t3xkppte"]
 
-[ext_resource type="Script" path="res://addons/ply/gui/inspector/inspector.gd" id="1"]
+[ext_resource type="Script" uid="uid://c5nn0lroqnyna" path="res://addons/ply/gui/inspector/inspector.gd" id="1"]
 
 [node name="Inspector" type="VBoxContainer"]
 anchors_preset = 15

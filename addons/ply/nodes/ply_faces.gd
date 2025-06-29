@@ -11,8 +11,8 @@ func _ready() -> void:
 	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	m.vertex_color_use_as_albedo = true
-	# m.flags_no_depth_test = true # enable for xray
-	# m.params_cull_mode = StandardMaterial3D.CULL_DISABLED # enable for xray
+	m.flags_no_depth_test = true # enable for xray
+	m.params_cull_mode = StandardMaterial3D.CULL_DISABLED # enable for xray
 
 
 func _process(_delta) -> void:
